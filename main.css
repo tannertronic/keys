@@ -1,0 +1,41 @@
+*, * > *{-webkit-box-sizing:border-box; -moz-box-sizing:border-box; box-sizing:border-box; max-width:100%;}
+
+body{background:#555; margin:0; font-size:20px; font-family:Lato, Arial, Helvetica, sans-serif;}
+.container{position:relative;}
+
+.title{font-family:'Alfa Slab One', Arial, Helvetica, sans-serif; text-transform:uppercase;}
+
+.settings{text-align:center; background:#ddd; position:relative; z-index:4;}
+.settings:after{content:''; display:block; clear:both;}
+.settings .title{font-size:24px; border-bottom:1px solid black; padding:10px 0;}
+.settings .info{padding:10px 0;}
+.key-wrapper, .strings-wrapper, .frets-wrapper, .tuning-wrapper{float:left; width:25%; height:100px;}
+.title .close{display:none;}
+
+.key-drop{background:#ddd; padding:15px; position:absolute; width:46%; left:20px; top:-20px; z-index:3; text-align:center; transition:top 0.5s;}
+.key-drop--open .key-drop{top:100px;}
+.key-drop--open .key-wrapper .open{display:none;}
+.key-drop--open .key-wrapper .close{display:inline;}
+
+.key-drop > *{float:left; width:33.333333333%;}
+.mod-wrapper .info > *{display:inline-block; padding:0 10px; vertical-align:top;}
+.mod-wrapper .info > * > *{display:block;}
+
+.tuning-drop{background:#ddd; padding:15px; position:absolute; width:20%; right:25px; top:-26px; text-align:center; transition:top 0.5s;}
+.tuning-drop--open .tuning-drop{top:100px;}
+.tuning-drop--open .tuning-wrapper .open{display:none;}
+.tuning-drop--open .tuning-wrapper .close{display:inline;}
+.tuning-drop .string-count{display:inline-block; padding-right:10px;}
+
+.fretboard-wrapper{padding-top:100px; display:flex;}
+.fretboard-wrapper:after{content:''; display:block; clear:both;}
+.stock{width:5%; float:left; display:flex;}
+.stock .head{width:50%; float:left;}
+.stock .head:after{content:''; display:block; clear:both;}
+.strings-open{width:50%; float:left; display:flex; flex-direction:column; border-right:1px solid #767676;}
+.fretboard{width:95%; float:left; background:#8d600a; display:flex;}
+.fret{border-right:1px solid #767676; flex-grow:1; max-width:75px;}
+.note{background:#AFB0B0; height:15px;}
+.note.open{width:100%; flex-grow:1; border-top:1px solid #767676;}
+.note.open:first-child{border-top:none;}
+.spacer{height:20px;}

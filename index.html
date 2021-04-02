@@ -1,0 +1,127 @@
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Keys</title>
+        <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Lato&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="main.css">
+    </head>
+    <body>
+
+        <div class="container" id="container">
+
+            <div class="settings">
+                <div class="key-wrapper" id="key-wrapper">
+                    <div class="title">
+                        Key
+                        <span class="open"><i class="fas fa-caret-down"></i></span>
+                        <span class="close"><i class="fas fa-caret-up"></i></span>
+                    </div>
+                    <div class="info">
+                        E major
+                    </div>
+                </div>
+                <div class="strings-wrapper">
+                    <div class="title">Strings</div>
+                    <div class="info">
+                        <span id="string-count-down"><i class="fas fa-caret-left"></i></span>
+                        <span id="string-count">4</span>
+                        <span id="string-count-up"><i class="fas fa-caret-right"></i></span>
+                    </div>
+                </div>
+                <div class="frets-wrapper">
+                    <div class="title">Frets</div>
+                    <div class="info">
+                        <span id="fret-count-down"><i class="fas fa-caret-left"></i></span>
+                        <span id="fret-count">15</span>
+                        <span id="fret-count-up"><i class="fas fa-caret-right"></i></span>
+                    </div>
+                </div>
+                <div class="tuning-wrapper" id="tuning-wrapper">
+                    <div class="title">
+                        Tuning
+                        <span class="open"><i class="fas fa-caret-down"></i></span>
+                        <span class="close"><i class="fas fa-caret-up"></i></span>
+                    </div>
+                    <div class="info">EADG</div>
+                </div>
+            </div>
+
+            <div class="key-drop">
+                <div class="root-wrapper">
+                    <div class="title">Root</div>
+                    <div class="info">
+                        <span id="root-note-down"><i class="fas fa-caret-left"></i></span>
+                        <span id="root-note">E</span>
+                        <span id="root-note-up"><i class="fas fa-caret-right"></i></span>
+                    </div>
+                </div>
+                <div class="mod-wrapper">
+                    <div class="title">Mod</div>
+                    <div class="info">
+                        <div class="natural">
+                            <span id="mod-select-natural"><i class="far fa-circle"></i></span>
+                            <span>&#9838;</span>
+                        </div>
+                        <div class="sharp">
+                            <span id="mod-select-sharp"><i class="far fa-circle"></i></span>
+                            <span>&#9839;</span>
+                        </div>
+                        <div class="flat">
+                            <span id="mod-select-sharp"><i class="far fa-circle"></i></span>
+                            <span>&#9837;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="type-wrapper">
+                    <div class="title">Type</div>
+                    <div class="info">
+                        <span id="scale-type-down"><i class="fas fa-caret-left"></i></span>
+                        <span id="scale-type">major</span>
+                        <span id="scale-type-up"><i class="fas fa-caret-right"></i></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tuning-drop">
+                <!-- render via js -->
+                <div class="tuning-string" id="string1">
+                    <span class="string-tuning-count">1</span>
+                    <i class="fas fa-caret-left"></i>
+                    <span class="string-note">E</span>
+                    <i class="fas fa-caret-right"></i>
+                </div>
+                <div class="tuning-string" id="string2">
+                    <span class="string-tuning-count">2</span>
+                    <i class="fas fa-caret-left"></i>
+                    <span class="string-note">A</span>
+                    <i class="fas fa-caret-right"></i>
+                </div>
+                <div class="tuning-string" id="string3">
+                    <span class="string-tuning-count">3</span>
+                    <i class="fas fa-caret-left"></i>
+                    <span class="string-note">D</span>
+                    <i class="fas fa-caret-right"></i>
+                </div>
+                <div class="tuning-string" id="string4">
+                    <span class="string-tuning-count">4</span>
+                    <i class="fas fa-caret-left"></i>
+                    <span class="string-note">G</span>
+                    <i class="fas fa-caret-right"></i>
+                </div>
+            </div>
+
+            <div class="fretboard-wrapper">
+                <div class="stock">
+                    <div class="head"></div>
+                    <div class="strings-open" id="strings-open"></div>
+                </div>
+                <div class="fretboard" id="fretboard"></div>
+            </div>
+
+        </div>
+
+        <script src="main.js"></script>
+    </body>
+</html>
