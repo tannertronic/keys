@@ -20,8 +20,11 @@ body{background:#555; margin:0; font-size:20px; font-family:Lato, Arial, Helveti
 .key-drop > *{float:left; width:33.333333333%;}
 .mod-wrapper .info > *{display:inline-block; padding:0 10px; vertical-align:top;}
 .mod-wrapper .info > * > *{display:block;}
+.mod-wrapper *[data-prefix="fas"]{display:none;}
+.mod-wrapper .selected *[data-prefix="far"]{display:none;}
+.mod-wrapper .selected *[data-prefix="fas"]{display:inline-block;}
 
-.tuning-drop{background:#ddd; padding:15px; position:absolute; width:20%; right:25px; top:-26px; text-align:center; transition:top 0.5s;}
+.tuning-drop{background:#ddd; padding:15px; position:absolute; width:20%; right:25px; top:-145px; text-align:center; transition:top 0.5s;}
 .tuning-drop--open .tuning-drop{top:100px;}
 .tuning-drop--open .tuning-wrapper .open{display:none;}
 .tuning-drop--open .tuning-wrapper .close{display:inline;}
