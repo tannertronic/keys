@@ -16,9 +16,11 @@ const rootNotesObj = [
 ];
 
 let sharp = true;
+let rootNote = 'E';
+let scaleType = 'major';
 
-const majorScale = [2, 2, 1, 2, 2, 2, 1];
-const minorScale = [2, 1, 2, 2, 1, 2, 2];
+const majorScale = [2, 2, 1, 2, 2, 2];
+const minorScale = [2, 1, 2, 2, 1, 2];
 //init tuning
 let tuning = ['E', 'A', 'D', 'G'];
 
@@ -29,6 +31,8 @@ const openFretsContainer = document.getElementById('strings-open');
 const fretboardContainer = document.getElementById('fretboard');
 const tuningWrapperContainer = document.getElementById('tuning-wrapper');
 const tuningDropContainer = document.getElementById('tuning-drop');
+const rootNoteContainer = document.getElementById('root-note');
+const keyWrapperContainer = document.getElementById('key-wrapper');
 
 //toggles for settings slideouts
 document.getElementById('key-wrapper').addEventListener('click', () => {
@@ -43,6 +47,8 @@ document.getElementById('string-count-down').addEventListener('click', stringCou
 document.getElementById('string-count-up').addEventListener('click', stringCountUp);
 document.getElementById('fret-count-down').addEventListener('click', fretCountDown);
 document.getElementById('fret-count-up').addEventListener('click', fretCountUp);
+document.getElementById('root-note-down').addEventListener('click', changeRootDown);
+document.getElementById('root-note-up').addEventListener('click', changeRootUp);
 
 function stringCountDown(){
     let stringCount = stringCountContainer.innerHTML;
@@ -119,13 +125,19 @@ function updateTuningView(){
     tuningWrapperContainer.querySelector('.info').innerHTML = tuning.join('');
 }
 
+function updateKeyView(){
+    keyWrapperContainer.querySelector('.info').innerHTML = rootNote + ' ' + scaleType;
+}
+
 function tuneDown(e){
     let stringNoteContainer = e.target.closest('.tuning-string').querySelector('.string-note');
     let originalNote = stringNoteContainer.innerHTML;
+    console.log(originalNote);
     let newNote = rootNoteDown(originalNote);
     stringNoteContainer.innerHTML = newNote;
     updateTuning();
     updateTuningView();
+    renderFretboard();
 }
 
 function tuneUp(e){
@@ -135,6 +147,7 @@ function tuneUp(e){
     stringNoteContainer.innerHTML = newNote;
     updateTuning();
     updateTuningView();
+    renderFretboard();
 }
 
 function rootNoteDown(note){
@@ -179,10 +192,54 @@ function rootNoteUp(note){
     }
 }
 
+function changeRootDown(){
+    let note = rootNoteContainer.innerHTML;
+    let newNote = rootNoteDown(note);
+    rootNoteContainer.innerHTML = newNote;
+    rootNote = newNote;
+    updateKeyView();
+    renderFretboard();
+}
+
+function changeRootUp(){
+    let note = rootNoteContainer.innerHTML;
+    let newNote = rootNoteUp(note);
+    rootNoteContainer.innerHTML = newNote;
+    rootNote = newNote;
+    updateKeyView();
+    renderFretboard();
+}
+
 //apply key marks- loop through frets and mark as active/marked
     //if align with selected key
 function markFrets(){
+    //create new array with notes in current scale
+    let intervals;
+    let scaleNotes = [];
+    if (scaleType === 'major'){
+        intervals = majorScale;
+    } else if (scaleType === 'minor'){
+        intervals = minorScale;
+    }
+    scaleNotes.push(rootNote);
+    let nextNote = rootNote;
+    for (let i = 0; i < intervals.length; i++){
+        for (let j = 0; j < intervals[i]; j++){
+            nextNote = rootNoteUp(nextNote);
+        }
+        scaleNotes.push(nextNote);
+    }
 
+    //loop through all notes on fretboard
+    let fretboardNotes = document.querySelectorAll('.note');
+    for (let i = 0; i < fretboardNotes.length; i++){
+        fretboardNotes[i].classList.remove('marked');
+        let currentNote = fretboardNotes[i].dataset.note;
+        //if match to a note in current scale, mark
+        if (scaleNotes.includes(currentNote)){
+            fretboardNotes[i].classList.add('marked');
+        }
+    }
 }
 
 //render fretboard- will be called on any change trigger and on init
@@ -196,6 +253,9 @@ function renderFretboard(){
     openFretsContainer.innerHTML = '';
     fretboardContainer.innerHTML = '';
 
+    //init string notes
+    let stringNotes = tuningWrapperContainer.querySelector('.info').innerHTML.split('');
+
     //build frets
     //open frets first separately
     let note;
@@ -205,6 +265,7 @@ function renderFretboard(){
         //note.setAttribute('id', 'string' + i + '-fret0');
         note.dataset.string = i;
         note.dataset.fret = 0;
+        note.dataset.note = stringNotes[i - 1];
         openFretsContainer.prepend(note);
     }
 
@@ -212,6 +273,11 @@ function renderFretboard(){
     let fret;
     let spacer;
     for (let i = 1; i <= fretCount; i++){
+        //shift stringNotes up 1 step each time we move to a new fret
+        for (let s = 0; s < stringNotes.length; s++){
+            let stringNote = rootNoteUp(stringNotes[s]);
+            stringNotes[s] = stringNote;
+        }
         fret = document.createElement('div');
         fret.classList.add('fret');
         let spacerBottom = document.createElement('div');
@@ -225,6 +291,7 @@ function renderFretboard(){
             note.classList.add('note');
             note.dataset.string = j;
             note.dataset.fret = i;
+            note.dataset.note = stringNotes[j - 1];
             fret.prepend(note);
             fret.prepend(spacer);
         }
