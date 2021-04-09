@@ -254,7 +254,14 @@ function renderFretboard(){
     fretboardContainer.innerHTML = '';
 
     //init string notes
-    let stringNotes = tuningWrapperContainer.querySelector('.info').innerHTML.split('');
+    //let stringNotes = tuningWrapperContainer.querySelector('.info').innerHTML.split('');
+    //instead of just splitting string from tuningWrapperContainer, grab individually from tuningDrop
+    //prevents splitting G# to G,#
+    let stringNotes = [];
+    let strings = document.querySelectorAll('.string-note');
+    for (let i = 0; i < strings.length; i++){
+        stringNotes.unshift(strings[i].innerHTML);
+    }
 
     //build frets
     //open frets first separately
@@ -272,6 +279,8 @@ function renderFretboard(){
     //generate and add rest of frets according to settings
     let fret;
     let spacer;
+    let dot = '<div class="dot"></div>';
+    let fretChildren;
     for (let i = 1; i <= fretCount; i++){
         //shift stringNotes up 1 step each time we move to a new fret
         for (let s = 0; s < stringNotes.length; s++){
@@ -294,6 +303,15 @@ function renderFretboard(){
             note.dataset.note = stringNotes[j - 1];
             fret.prepend(note);
             fret.prepend(spacer);
+        }
+        //apply fretboard dots
+        if (i === 12 || i === 24){
+            fretChildren = fret.children;
+            fretChildren[stringCount - 1].innerHTML = dot;
+            fretChildren[stringCount + 1].innerHTML = dot;
+        } else if (i === 3 || i === 5 || i === 7 || i === 9 || i === 15 || i === 17 || i === 19 || i === 21){
+            fretChildren = fret.children;
+            fretChildren[stringCount].innerHTML = dot;
         }
     }
 

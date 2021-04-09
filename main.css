@@ -24,7 +24,7 @@ body{background:#555; margin:0; font-size:20px; font-family:Lato, Arial, Helveti
 .mod-wrapper .selected *[data-prefix="far"]{display:none;}
 .mod-wrapper .selected *[data-prefix="fas"]{display:inline-block;}
 
-.tuning-drop{background:#ddd; padding:15px; position:absolute; width:20%; right:25px; top:-145px; text-align:center; transition:top 0.5s;}
+.tuning-drop{background:#ddd; padding:15px; position:absolute; width:20%; right:25px; top:-145px; text-align:center; transition:top 0.5s; z-index:3;}
 .tuning-drop--open .tuning-drop{top:100px;}
 .tuning-drop--open .tuning-wrapper .open{display:none;}
 .tuning-drop--open .tuning-wrapper .close{display:inline;}
@@ -38,8 +38,9 @@ body{background:#555; margin:0; font-size:20px; font-family:Lato, Arial, Helveti
 .strings-open{width:50%; float:left; display:flex; flex-direction:column; border-right:1px solid #767676;}
 .fretboard{width:95%; float:left; background:#8d600a; display:flex;}
 .fret{border-right:1px solid #767676; flex-grow:1; max-width:75px;}
-.note{background:#AFB0B0; height:15px;}
+.note{background:#AFB0B0; height:20px; position:relative;}
 .note.open{width:100%; flex-grow:1; border-top:1px solid #767676;}
 .note.open:first-child{border-top:none;}
 .note.marked{background:red;}
-.spacer{height:20px;}
+.spacer{height:20px; position:relative;}
+.dot{position:absolute; width:20px; height:20px; border-radius:50%; background:black; opacity:0.3; left:25%;}
